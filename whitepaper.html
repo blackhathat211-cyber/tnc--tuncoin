@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whitepaper | TUNCOIN (TNC)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --gold: #f1c40f;
+            --blue-neon: #00f2fe;
+            --bg-dark: #050a18;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-gray: #b0b0b0;
+            --border-color: rgba(241, 196, 15, 0.3);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: white;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            /* لضمان طباعة الخلفية والألوان */
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header Section - متجاوب */
+        header {
+            text-align: center;
+            padding-bottom: 40px;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 50px;
+        }
+
+        .wp-tag {
+            color: var(--blue-neon);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: bold;
+            font-size: clamp(0.7rem, 2vw, 0.9rem);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 8vw, 3.5rem); /* حجم خط مرن */
+            color: var(--gold);
+            margin: 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+
+        .sub-header {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            color: white;
+            font-weight: 300;
+        }
+
+        /* Sections Styling */
+        section {
+            margin-bottom: 60px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        h2 {
+            color: var(--gold);
+            font-size: clamp(1.4rem, 5vw, 2rem);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        h2 i { font-size: 1.2rem; color: var(--blue-neon); }
+
+        p {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        /* List Styling */
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 15px;
+            color: var(--text-gray);
+        }
+
+        ul li::before {
+            content: "\f058";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--blue-neon);
+        }
+
+        /* Table Styling - متجاوب */
+        .table-container {
+            overflow-x: auto; /* يسمح بالتمرير الجانبي على الهواتف */
+            margin: 30px 0;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            -webkit-overflow-scrolling: touch;
+        }
+
+        table {
+            width: 100%;
+            min-width: 600px; /* لضمان عدم تكدس البيانات في الشاشات الصغيرة */
+            border-collapse: collapse;
+            background: var(--card-bg);
+        }
+
+        th {
+            background-color: rgba(0, 242, 254, 0.1) !important;
+            color: var(--gold) !important;
+            padding: 18px;
+            text-align: left;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        td {
+            padding: 15px 18px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: white;
+        }
+
+        /* Highlight Boxes */
+        .highlight-card {
+            background: linear-gradient(135deg, rgba(241, 196, 15, 0.05), rgba(0, 242, 254, 0.05)) !important;
+            border-left: 5px solid var(--gold) !important;
+            padding: 25px;
+            border-radius: 0 15px 15px 0;
+            margin: 30px 0;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid var(--border-color);
+            margin-top: 50px;
+        }
+
+        .footer-logo {
+            color: var(--gold);
+            font-weight: bold;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .btn-pdf {
+            background: var(--gold) !important;
+            color: #000 !important;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* تحديث إعدادات الطباعة للحفاظ على الهوية البصرية */
+        @media print {
+            body { 
+                background-color: #050a18 !important; 
+                color: white !important; 
+            }
+            .container { max-width: 100%; padding: 20px; }
+            section { page-break-inside: avoid; }
+            .btn-pdf { display: none; }
+            h1, h2, .wp-tag { color: #f1c40f !important; }
+            p, td, li { color: #b0b0b0 !important; }
+            .table-container { border-color: #f1c40f !important; }
+            table { background-color: #0a1226 !important; }
+            th { background-color: #1a2a5a !important; }
+        }
+
+        /* تحسينات إضافية للهواتف */
+        @media (max-width: 600px) {
+            .container { padding: 20px 15px; }
+            p { text-align: left; }
+            h2 { flex-direction: row; font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <span class="wp-tag">Official Whitepaper v1.0 | Established 2026</span>
+            <h1>TUNCOIN (TNC)</h1>
+            <p class="sub-header">The Future of Decentralized Digital TNC ALPHA</p>
+        </header>
+
+        <section id="executive-summary">
+            <h2><i class="fas fa-file-alt"></i> 1. Executive Summary</h2>
+            <p>TUNCOIN (TNC) is not just a cryptocurrency; it is the fuel for a next-generation financial engine. Our mission is to eliminate the barriers between traditional TNC ALPHA and the Web3 world by providing a zero-fee payment infrastructure and a fully integrated digital TNC ALPHA. By 2027, TNC aims to be the primary medium for global payments, lending, and high-yield staking.</p>
+        </section>
+
+        <section id="digital-bank">
+            <h2><i class="fas fa-university"></i> 2. The TNC Digital TNC ALPHA (The Core Utility)</h2>
+            <p>The TNC TNC ALPHA represents the first decentralized TNC ALPHA protocol built on the Binance Smart Chain (BSC).</p>
+            <ul>
+                <li><strong>Operational Horizon:</strong> The TNC ALPHA engine is currently under intensive development, with a roadmap leading to full-scale operations by 2027.</li>
+                <li><strong>Zero-Fee Payments:</strong> TNC enables instant global transactions with 0% tax, ensuring that value is transferred without parasitic fees.</li>
+                <li><strong>Lending & Staking:</strong> Users can deposit TNC into secure vaults to earn "Respectable Interest" or use their holdings as collateral for decentralized loans.</li>
+            </ul>
+        </section>
+
+        <section id="tokenomics">
+            <h2><i class="fas fa-coins"></i> 3. Tokenomics & Supply Allocation</h2>
+            <p>TNC features a fixed total supply of 200 Billion tokens. The allocation is mathematically designed for market stability and long-term project viability:</p>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Amount</th>
+                            <th>Percentage</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Market Liquidity</td><td>125B</td><td>62.5%</td><td>Allocated for exchanges.</td></tr>
+                        <tr><td>TNC ALPHA Wallet</td><td>50B</td><td>25.0%</td><td>Dedicated to TNC ALPHA operations.</td></tr>
+                        <tr><td>Rewards & Staking</td><td>10B</td><td>5.0%</td><td>Incentives for holders.</td></tr>
+                        <tr><td>Reserve</td><td>6B</td><td>3.0%</td><td>Growth fund.</td></tr>
+                        <tr><td>Owner Wallet</td><td>5B</td><td>2.5%</td><td>Strategic governance.</td></tr>
+                        <tr><td>Team Wallet</td><td>4B</td><td>2.0%</td><td>Development incentives.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="security">
+            <h2><i class="fas fa-shield-alt"></i> 4. Security & Transparency</h2>
+            <div class="highlight-card">
+                <p>We prioritize investor safety through strict smart-contract-enforced lock periods:</p>
+                <ul>
+                    <li><strong>TNC ALPHA Vault Lock:</strong> 50B TNC is Locked for 3 Years to ensure stability.</li>
+                    <li><strong>Team Vesting:</strong> 4B TNC is Locked for 2 Years to align interests.</li>
+                    <li><strong>Liquidity Release:</strong> Gradual release schedule to maintain stable price floor.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="advantages">
+            <h2><i class="fas fa-chart-line"></i> 5. Economic Advantages</h2>
+            <ul>
+                <li><strong>0% Buy/Sell Tax:</strong> Encourages high-volume trading and merchant adoption.</li>
+                <li><strong>Deflationary Mechanism:</strong> Profits are used to buy back and burn TNC tokens.</li>
+                <li><strong>BSC (BEP20) Network:</strong> High-speed and low-cost transaction finality.</li>
+            </ul>
+        </section>
+
+        <section id="roadmap">
+            <h2><i class="fas fa-map-signs"></i> 6. Roadmap to 2027</h2>
+            <ul>
+                <li><strong>Phase 1 (2025-2026):</strong> Token Launch and Core TNC ALPHA Engine Development.</li>
+                <li><strong>Phase 2 (2026):</strong> Alpha Testing of TNC Digital TNC ALPHA interface.</li>
+                <li><strong>Phase 3 (2027):</strong> Full Deployment, Mobile App Launch, and Merchant Integration.</li>
+            </ul>
+        </section>
+
+        <footer>
+            <span class="footer-logo">TUNCOIN: TNC ALPHA on the Blockchain.</span>
+            <button onclick="window.print()" class="btn-pdf">
+                <i class="fas fa-file-pdf"></i> Save as Official PDF
+            </button>
+        </footer>
+    </div>
+
+</body>
+</html>

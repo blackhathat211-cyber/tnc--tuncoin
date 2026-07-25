@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TNC Digital TNC ALPHA | The Future of Finance</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* --- الأساسيات --- */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #050a18; /* لون داكن جداً للخلفية */
+            color: white;
+            scroll-behavior: smooth;
+        }
+
+        /* --- قسم الهيرو والاشعار (قيد التطوير) --- */
+        .hero-container {
+            position: relative;
+            width: 100%;
+            height: 100vh; /* يملأ الشاشة بالكامل */
+            background-image: url('tnc_bank_hero.jpg'); /* اسم الصورة المرفقة */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* الطبقة الشفافة (التنبيه) */
+        .development-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75); /* طبقة داكنة شفافة */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10; /* فوق الصورة */
+            backdrop-filter: blur(5px); /* تأثير ضبابي على الخلفية */
+            border: 2px solid #00f2fe; /* إطار نيون */
+        }
+
+        .overlay-content {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .overlay-content i {
+            font-size: 5rem;
+            color: #f1c40f; /* لون ذهبي */
+            margin-bottom: 20px;
+            animation: pulse 2s infinite; /* حركة نبض */
+        }
+
+        .overlay-content h1 {
+            font-size: 3.5rem;
+            color: #00f2fe; /* لون نيون */
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin: 0;
+            text-shadow: 0 0 15px #00f2fe;
+        }
+
+        .overlay-content p {
+            font-size: 1.5rem;
+            color: white;
+            margin-top: 15px;
+            font-weight: 300;
+        }
+
+        /* --- الأقسام التفصيلية وتحت الهيرو --- */
+        .main-content {
+            padding: 80px 20px;
+            background-color: #050a18;
+            position: relative;
+            z-index: 5; /* تحت الاشعار */
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #f1c40f;
+            margin-bottom: 60px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 2px solid #f1c40f;
+            display: inline-block;
+            padding-bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            position: relative;
+        }
+
+        /* --- شبكة الميزات (Grid) --- */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.03); /* خلفية كارت شبه شفافة */
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: #00f2fe;
+            box-shadow: 0 10px 30px rgba(0, 242, 254, 0.2);
+        }
+
+        .feature-card i {
+            font-size: 3rem;
+            color: #00f2fe;
+            margin-bottom: 25px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: #b0b0b0;
+            line-height: 1.6;
+        }
+
+        /* --- قسم الميزانية الجذاب --- */
+        .budget-section {
+            background: linear-gradient(135deg, #0a1428, #162a50);
+            padding: 60px;
+            border-radius: 20px;
+            margin-top: 80px;
+            border: 2px solid #f1c40f;
+            text-align: center;
+        }
+
+        .budget-title {
+            color: #f1c40f;
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+
+        .budget-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        .budget-desc {
+            font-size: 1.2rem;
+            color: #b0b0b0;
+            margin-top: 20px;
+            font-weight: 300;
+        }
+
+        /* --- قسم سهولة الاستخدام --- */
+        .ease-of-use {
+            margin-top: 80px;
+            text-align: center;
+        }
+
+        .use-steps {
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+
+        .step {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+        }
+
+        .step-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: rgba(0, 242, 254, 0.1);
+            border: 2px solid #00f2fe;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            color: #00f2fe;
+        }
+
+        /* --- التحريكات (Animations) --- */
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* --- ميديا كويري للتجاوب (Responsive) --- */
+        @media (max-width: 768px) {
+            .overlay-content h1 { font-size: 2.2rem; letter-spacing: 2px; }
+            .overlay-content p { font-size: 1.1rem; }
+            .section-title { font-size: 1.8rem; }
+            .feature-card { padding: 25px; }
+            .budget-value { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero-container">
+        <div class="development-overlay">
+            <div class="overlay-content">
+                <i class="fas fa-tools"></i>
+                <h1>TNC ALPHA</h1>
+                <p>Digital TNC ALPHA Engine - Under Development</p>
+                <p>Launch in 2027</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="container">
+
+            <div style="text-align: center; margin-bottom: 80px;">
+                <h2 class="section-title">What is TNC Digital TNC ALPHA?</h2>
+                <p style="font-size: 1.2rem; line-height: 1.8; color: #b0b0b0; max-width: 800px; margin: 0 auto;">
+                    TNC ALPHA is the core utility of the TUNCOIN ecosystem. It is the first fully decentralized digital TNC ALPHA built on the Binance Smart Chain, designed to bridge the gap between traditional finance and the Web3 economy. It empowers TNC holders to manage, stake, and use their digital assets as seamless fiat currency replacements.
+                </p>
+            </div>
+
+            <div class="budget-section">
+                <h3 class="budget-title"><i class="fas fa-vault"></i> TNC ALPHA Operational Budget</h3>
+                <div class="budget-value">50 BILLION TNC</div>
+                <p class="budget-desc">Dedicated capital for TNC ALPHA operations, loans, and market stabilization. Locked for 3 Years.</p>
+            </div>
+
+            <div style="margin-top: 80px;">
+                <h2 class="section-title">Features & Services</h2>
+                <div class="features-grid">
+                    
+                    <div class="feature-card">
+                        <i class="fas fa-exchange-alt"></i>
+                        <h3>Global Transfers</h3>
+                        <p>Send TNC instantly to anyone, anywhere in the world, with near-zero transaction fees.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <i class="fas fa-hand-holding-usd"></i>
+                        <h3>Lending Protocol</h3>
+                        <p>Use your TNC as collateral to instantly borrow other cryptocurrencies or fiat equivalents.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Staking Rewards</h3>
+                        <p>Stake your TNC in high-yield TNC ALPHA vaults to earn "Respectable Interest" paid directly to your wallet.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <i class="fas fa-credit-card"></i>
+                        <h3>Merchant Integration</h3>
+                        <p>Soon you can spend TNC directly with linked merchants for real-world products.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ease-of-use">
+                <h2 class="section-title">Seamless User Experience</h2>
+                <p style="font-size: 1.1rem; color: #b0b0b0; max-width: 600px; margin: 0 auto 50px;">
+                    Our dashboard is designed to be familiar to users of traditional mobile TNC ALPHA apps, removing the complexity of Web3 interactions.
+                </p>
+                <div class="use-steps">
+                    <div class="step">
+                        <div class="step-icon"><i class="fas fa-wallet"></i></div>
+                        <h4>1. Connect Wallet</h4>
+                        <p>MetaMask or Trust Wallet</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon"><i class="fas fa-piggy-bank"></i></div>
+                        <h4>2. Deposit TNC</h4>
+                        <p>Into your TNC ALTHA Vault</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon"><i class="fas fa-money-bill-wave"></i></div>
+                        <h4>3. Start TNC ALPHA</h4>
+                        <p>Send, Stake, or Borrow</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
