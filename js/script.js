@@ -133,11 +133,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+
+
 */
   /* TUNCOIN (TNC) Official Web3 Logic
     - Secured with textContent (Anti-XSS)
     - Integrated with ethers.js v6
     - Profile Modal & Sidebar Management
+    - Mobile & Desktop MetaMask Support
 */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -194,49 +197,65 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const abbreviateAddress = (address) => `${address.substring(0, 6)}...${address.substring(address.length - 4)}`;
 
+    // Helper: Detect mobile devices for deep linking
+    const isMobileDevice = () => {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    };
+
     const connectWallet = async () => {
-        if (typeof window.ethereum === 'undefined') {
-            alert('MetaMask is not installed. Please install it to use TNC Portal.');
+        // Case 1: MetaMask extension or in-app browser detected (Desktop + MetaMask Mobile Browser)
+        if (typeof window.ethereum !== 'undefined') {
+            try {
+                const provider = new ethers.BrowserProvider(window.ethereum);
+                const accounts = await provider.send("eth_requestAccounts", []);
+                const signer = await provider.getSigner();
+                const account = accounts[0];
+
+                // تحديث الواجهة بأمان (Safe textContent)
+                if (userAddressAbbr) userAddressAbbr.textContent = abbreviateAddress(account);
+                if (userAddressFull) userAddressFull.textContent = account; // عرض العنوان الكامل في المودال
+                
+                connectBtn.textContent = "Connected"; 
+                connectBtn.style.backgroundColor = "#2ecc71";
+                connectBtn.style.color = "#fff";
+
+                // جلب الرصيد الحقيقي من البلوكشين
+                const contract = new ethers.Contract(TNC_CONTRACT_ADDRESS, TNC_ABI, provider);
+                
+                try {
+                    const rawBalance = await contract.balanceOf(account);
+                    const decimals = await contract.decimals();
+                    const formattedBalance = ethers.formatUnits(rawBalance, decimals);
+                    
+                    // عرض الرصيد في المودال بتنسيق آمن
+                    if (userBalance) {
+                        userBalance.textContent = parseFloat(formattedBalance).toLocaleString(undefined, {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2
+                        });
+                    }
+                } catch (balanceError) {
+                    console.warn("Could not fetch TNC balance.");
+                    if (userBalance) userBalance.textContent = "0.00";
+                }
+
+            } catch (error) {
+                console.error('User denied or error occurred:', error);
+            }
             return;
         }
 
-        try {
-            const provider = new ethers.BrowserProvider(window.ethereum);
-            const accounts = await provider.send("eth_requestAccounts", []);
-            const signer = await provider.getSigner();
-            const account = accounts[0];
-
-            // تحديث الواجهة بأمان (Safe textContent)
-            if (userAddressAbbr) userAddressAbbr.textContent = abbreviateAddress(account);
-            if (userAddressFull) userAddressFull.textContent = account; // عرض العنوان الكامل في المودال
-            
-            connectBtn.textContent = "Connected"; 
-            connectBtn.style.backgroundColor = "#2ecc71";
-            connectBtn.style.color = "#fff";
-
-            // جلب الرصيد الحقيقي من البلوكشين
-            const contract = new ethers.Contract(TNC_CONTRACT_ADDRESS, TNC_ABI, provider);
-            
-            try {
-                const rawBalance = await contract.balanceOf(account);
-                const decimals = await contract.decimals();
-                const formattedBalance = ethers.formatUnits(rawBalance, decimals);
-                
-                // عرض الرصيد في المودال بتنسيق آمن
-                if (userBalance) {
-                    userBalance.textContent = parseFloat(formattedBalance).toLocaleString(undefined, {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2
-                    });
-                }
-            } catch (balanceError) {
-                console.warn("Could not fetch TNC balance.");
-                if (userBalance) userBalance.textContent = "0.00";
-            }
-
-        } catch (error) {
-            console.error('User denied or error occurred:', error);
+        // Case 2: Mobile browser without MetaMask -> Deep Link to MetaMask In-App Browser
+        if (isMobileDevice()) {
+            const currentUrl = window.location.href.replace(/^https?:\/\//, '');
+            const metaMaskDeepLink = `https://metamask.app.link/dapp/${currentUrl}`;
+            window.location.href = metaMaskDeepLink;
+            return;
         }
+
+        // Case 3: Desktop without MetaMask -> Fallback prompt
+        alert('MetaMask is not installed. Please install it to use TNC Portal.');
+        window.open('https://metamask.io/download/', '_blank');
     };
 
     // ======= 5. التحكم في فتح المودال أو الربط =======
